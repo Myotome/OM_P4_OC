@@ -7,22 +7,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.myotome.mareu.di.DI;
 import fr.myotome.mareu.R;
 import fr.myotome.mareu.controler.RecyclerViewAdapter;
+import fr.myotome.mareu.databinding.ActivityListMeetingBinding;
+import fr.myotome.mareu.di.DI;
 import fr.myotome.mareu.model.Meeting;
 import fr.myotome.mareu.service.MeetingApiService;
 import fr.myotome.mareu.ui.dialog.CalendarDialogFragment;
@@ -35,31 +32,31 @@ public class ListMeetingActivity extends AppCompatActivity implements RecyclerVi
 
     private final MeetingApiService mApiService = DI.getMeetingApiService();
     private List<Meeting> mMeetings = mApiService.getFullMeeting();
-//    private final List<Meeting> mFullMeetings = mApiService.getFullMeeting();
     private List<String> mFilteredList = new ArrayList<>();
-    
+    private ActivityListMeetingBinding mBinding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_meeting);
-//        mMeetings = new ArrayList<>(mFullMeetings);
+        mBinding = ActivityListMeetingBinding.inflate(getLayoutInflater());
+        View view = mBinding.getRoot();
+        setContentView(view);
         initList();
         fabConfigure();
 
     }
 
     private void initList() {
-        TextView mMessage = findViewById(R.id.tv_activity_list_meeting);
+
         if (mMeetings.size() == mApiService.getFullMeeting().size()) {
-            mMessage.setVisibility(View.GONE);
+            mBinding.tvActivityListMeeting.setVisibility(View.GONE);
         } else {
-            mMessage.setVisibility(View.VISIBLE);
+            mBinding.tvActivityListMeeting.setVisibility(View.VISIBLE);
         }
-        RecyclerView recyclerView = findViewById(R.id.rv_activity_list_meeting);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mMeetings, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mBinding.rvActivityListMeeting.setAdapter(adapter);
+        mBinding.rvActivityListMeeting.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -87,8 +84,7 @@ public class ListMeetingActivity extends AppCompatActivity implements RecyclerVi
     }
 
     private void fabConfigure() {
-        FloatingActionButton mAddMeeting = findViewById(R.id.fab_activity_list_meeting);
-        mAddMeeting.setOnClickListener(view -> {
+        mBinding.fabActivityListMeeting.setOnClickListener(view -> {
             Intent intent = new Intent(ListMeetingActivity.this, AddMeetingActivity.class);
             ListMeetingActivity.this.startActivity(intent);
         });
@@ -96,7 +92,6 @@ public class ListMeetingActivity extends AppCompatActivity implements RecyclerVi
 
     @Override
     public void onDeleteClick(int position) {
-//        Meeting meeting = mFullMeetings.get(position);
         Meeting meeting = mMeetings.get(position);
         mApiService.deleteMeeting(meeting);
         initList();
@@ -106,6 +101,7 @@ public class ListMeetingActivity extends AppCompatActivity implements RecyclerVi
     /**
      * use calendar and roomFilter implementation
      * for obtain
+     *
      * @param filter list of string
      */
     @Override

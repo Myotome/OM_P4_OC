@@ -7,7 +7,14 @@ import fr.myotome.mareu.model.Meeting;
 
 public class FakeMeetingApiService implements MeetingApiService{
 
+    /**
+     * use this one for test app with Fake List
+     */
     private final List<Meeting> mFullMeetings = FakeDataGenerator.generateMeeting();
+
+    /**
+     * Use this one in final use, no list in beginning
+     */
 //    private final List<Meeting> mFullMeetings = new ArrayList<>();
     private List<Meeting> mMeetings = new ArrayList<>(mFullMeetings);
 
