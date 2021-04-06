@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.AddMeetingActivity"
+    android:background="@color/charte_olive">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_addmeeting" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+
+
+    <ImageView
+        android:id="@+id/iv_addmeeting"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:contentDescription="@string/logo" />
+
+
+    <TextView
+        android:id="@+id/tv_addmeeting_room"
+        style="@style/tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:text="@string/room"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/iv_addmeeting"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/sp_addmeeting_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toEndOf="@id/iv_addmeeting"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addmeeting_room" />
+
+
+    <TextView
+        android:id="@+id/tv_addmeeting_date"
+        style="@style/tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:text="@string/date"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_addmeeting" />
+
+    <TextView
+        android:id="@+id/tv_addmeeting_datepicker"
+        style="@style/answer_tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:hint="@string/select_date"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addmeeting_date" />
+
+
+    <TextView
+        android:id="@+id/tv_addmeeting_start"
+        style="@style/half_tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:text="@string/start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_addmeeting_startpicker"
+        style="@style/half_answer_tv_add_meeting_style"
+        android:layout_width="wrap_content"
+        android:hint="@string/starting_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addmeeting_start" />
+
+
+    <TextView
+        android:id="@+id/tv_addmeeting_end"
+        style="@style/half_tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:text="@string/end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addmeeting_startpicker" />
+
+    <TextView
+        android:id="@+id/tv_addmeeting_endpicker"
+        style="@style/half_answer_tv_add_meeting_style"
+        android:layout_width="wrap_content"
+        android:hint="@string/ending_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addmeeting_end" />
+
+
+    <TextView
+        android:id="@+id/tv_addmeeting_subject"
+        style="@style/tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:text="@string/subject"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addmeeting_datepicker" />
+
+    <EditText
+        android:id="@+id/et_addmeeting_subject"
+        style="@style/answer_tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:hint="@string/subject"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addmeeting_subject" />
+
+
+    <Button
+        android:id="@+id/bt_addmeeting_email"
+        style="@style/tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:text="@string/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_addmeeting_endpicker" />
+
+    <TextView
+        android:id="@+id/tv_addmeeting_email"
+        style="@style/answer_tv_add_meeting_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/bt_addmeeting_email" />
+
+
+
+    <Button
+        android:id="@+id/bt_addmeeting_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_15sdp"/>
+
+    <Button
+        android:id="@+id/bt_addmeeting_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_meeting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/_15sdp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">MaRéu</string>
+    <string name="heading">Room - Hour - Subject</string>
+    <string name="mail">emails of participants</string>
+    <string name="logo">Meeting Logo</string>
+    <string name="trash">trash logo</string>
+    <string name="room">Choose your meeting room</string>
+    <string name="date">Choose date of meeting</string>
+    <string name="start">Choose start time of meeting</string>
+    <string name="end">Choose end time of meeting</string>
+    <string name="subject">Choose subject of meeting</string>
+    <string name="email">Choose participant</string>
+    <string name="select_date">Select a date</string>
+    <string name="starting_time">Select starting time</string>
+    <string name="ending_time">Select ending time</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_meeting">Add meeting</string>
+    <string name="select">Select meeting participants</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="date_filter">Date filter</string>
+    <string name="room_filter">Room filter</string>
+    <string name="error">Please fill all fields </string>
+    <string name="clear">CLEAR</string>
+    <string name="filtered_list">Filtered list</string>
+    <string name="fab" translatable="false">floating action button</string>
+
+
+    <string-array name="email_list">
+        <item>arthur@lamzone.com</item>
+        <item>guenievre@lamzone.com</item>
+        <item>leodagan@lamzone.com</item>
+        <item>seli@lamzone.com</item>
+        <item>lancelot@lamzone.com</item>
+        <item>perceval@lamzone.com</item>
+        <item>karadoc@lamzone.com</item>
+        <item>yvain@lamzone.com</item>
+        <item>gauvain@lamzone.com</item>
+        <item>azenor@lamzone.com</item>
+        <item>merlin@lamzone.com</item>
+        <item>elias@lamzone.com</item>
+
+    </string-array>
+</resources>

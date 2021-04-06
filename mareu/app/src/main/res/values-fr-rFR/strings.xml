@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MaRéu</string>
+    <string name="mail">Emails des participants</string>
+    <string name="logo">Logo de réunion</string>
+    <string name="trash">Logo de la poubelle</string>
+    <string name="room">Choisissez votre salle de réunion</string>
+    <string name="date">Choisissez votre date de réunion</string>
+    <string name="start">Choisissez l\'heure de début de la réunion</string>
+    <string name="end">Choisissez l\'heure de fin de la réunion</string>
+    <string name="subject">Choisissez le sujet de la réunion</string>
+    <string name="email">Choisissez les participants</string>
+    <string name="select_date">Sélectionnez une date</string>
+    <string name="starting_time">Sélectionner l\'heure de début</string>
+    <string name="ending_time">Sélectionnez l\'heure de fin</string>
+    <string name="cancel">Annuler</string>
+    <string name="add_meeting">Ajouter une réunion</string>
+    <string name="select">Sélectionnez les participants à la réunion</string>
+    <string name="date_filter">Filtre par date</string>
+    <string name="room_filter">Filtre par salle</string>
+    <string name="error">Merci de compléter tous les champs</string>
+    <string name="clear">Remise à zero</string>
+    <string name="filtered_list">Liste filtrée</string>
+    <string name="heading">Salle - Heure - Sujet</string>
+</resources>
