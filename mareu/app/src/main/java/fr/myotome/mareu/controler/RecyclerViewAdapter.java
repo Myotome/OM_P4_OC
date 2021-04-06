@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import fr.myotome.mareu.R;
+import fr.myotome.mareu.databinding.FragmentMeetingListBinding;
 import fr.myotome.mareu.model.Meeting;
 import fr.myotome.mareu.model.RoomName;
 
@@ -24,6 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private final List<Meeting> mMeetings;
     private final OnDeleteClickListener mListener;
+    private FragmentMeetingListBinding mBinding;
 
     /**
      * Recycler view Constructor
@@ -37,8 +38,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_meeting_list, parent, false);
-        return new ViewHolder(view, mListener);
+        mBinding = FragmentMeetingListBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        return new ViewHolder(mBinding, mListener);
     }
 
     @Override
@@ -59,20 +60,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final TextView mMeeting;
-        private final TextView mMail;
-        private final ImageView mLogo;
+        private final TextView mMeeting = mBinding.tvMeetingfragHeading;
+        private final TextView mMail = mBinding.tvMeetingfragEmail;
+        private final ImageView mLogo = mBinding.ivMeetingfragLogo;
         private final OnDeleteClickListener mDeleteClickListener;
 
-        public ViewHolder(@NonNull View itemView, OnDeleteClickListener deleteClickListener) {
-            super(itemView);
-            mMeeting = itemView.findViewById(R.id.tv_meetingfrag_heading);
-            mMail = itemView.findViewById(R.id.tv_meetingfrag_email);
-            mLogo = itemView.findViewById(R.id.iv_meetingfrag_logo);
-            ImageView trash = itemView.findViewById(R.id.iv_meetingfrag_delete);
+        public ViewHolder(FragmentMeetingListBinding binding, OnDeleteClickListener deleteClickListener) {
+            super(binding.getRoot());
+            mBinding = binding;
             mDeleteClickListener = deleteClickListener;
 
-            trash.setOnClickListener(this);
+            mBinding.ivMeetingfragDelete.setOnClickListener(this);
         }
 
         @Override

@@ -9,12 +9,7 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -26,6 +21,7 @@ import com.bumptech.glide.Glide;
 import java.util.Calendar;
 import java.util.List;
 
+import fr.myotome.mareu.databinding.ActivityAddMeetingBinding;
 import fr.myotome.mareu.di.DI;
 import fr.myotome.mareu.R;
 import fr.myotome.mareu.controler.DatePickerFragment;
@@ -41,20 +37,19 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         AdapterView.OnItemSelectedListener,
         EmailListDialogFragment.onMultipleChoiceListener {
 
-    private Spinner mRoomSpinner;
-    private TextView mDisplayDate, mDisplayStartTime, mDisplayEndTime, mDisplayEmail;
-    private EditText mSubject;
     private String mRoomName;
     private MeetingApiService mApiService;
     private boolean mIsStart = true;
     private List<String> mParticipant;
-    private ImageView mLogo;
+    private ActivityAddMeetingBinding mBinding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_meeting);
+        mBinding = ActivityAddMeetingBinding.inflate(getLayoutInflater());
+        View view = mBinding.getRoot();
+        setContentView(view);
         initialise();
         instanceSpinner();
 
@@ -63,23 +58,12 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     private void initialise() {
         mApiService = DI.getMeetingApiService();
 
-        mRoomSpinner = findViewById(R.id.sp_addmeeting_room);
-        mDisplayDate = findViewById(R.id.tv_addmeeting_datepicker);
-        mDisplayStartTime = findViewById(R.id.tv_addmeeting_startpicker);
-        mDisplayEndTime = findViewById(R.id.tv_addmeeting_endpicker);
-        mSubject = findViewById(R.id.et_addmeeting_subject);
-        Button cancel = findViewById(R.id.bt_addmeeting_cancel);
-        Button addMeeting = findViewById(R.id.bt_addmeeting_add);
-        Button email = findViewById(R.id.bt_addmeeting_email);
-        mDisplayEmail = findViewById(R.id.tv_addmeeting_email);
-        mLogo = findViewById(R.id.iv_addmeeting);
-
-        mDisplayDate.setOnClickListener(this);
-        mDisplayStartTime.setOnClickListener(this);
-        mDisplayEndTime.setOnClickListener(this);
-        cancel.setOnClickListener(this);
-        addMeeting.setOnClickListener(this);
-        email.setOnClickListener(this);
+        mBinding.tvAddmeetingDatepicker.setOnClickListener(this);
+        mBinding.tvAddmeetingStartpicker.setOnClickListener(this);
+        mBinding.tvAddmeetingEndpicker.setOnClickListener(this);
+        mBinding.btAddmeetingCancel.setOnClickListener(this);
+        mBinding.btAddmeetingAdd.setOnClickListener(this);
+        mBinding.btAddmeetingEmail.setOnClickListener(this);
 
     }
 
@@ -87,8 +71,8 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
 
         ArrayAdapter<RoomName> roomNameAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, RoomName.values());
         roomNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mRoomSpinner.setAdapter(roomNameAdapter);
-        mRoomSpinner.setOnItemSelectedListener(this);
+        mBinding.spAddmeetingRoom.setAdapter(roomNameAdapter);
+        mBinding.spAddmeetingRoom.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -96,7 +80,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         mRoomName = adapterView.getItemAtPosition(i).toString();
         Glide.with(view)
                 .load(RoomName.valueOf(mRoomName).getDrawable())
-                .into(mLogo);
+                .into(mBinding.ivAddmeeting);
     }
 
     @Override
@@ -110,7 +94,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
-        mDisplayDate.setText(java.text.DateFormat.getDateInstance().format(calendar.getTime()));
+        mBinding.tvAddmeetingDatepicker.setText(java.text.DateFormat.getDateInstance().format(calendar.getTime()));
     }
 
     @Override
@@ -118,9 +102,9 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, hour, min);
         if (mIsStart) {
-            mDisplayStartTime.setText(DateFormat.format("hh:mm aa", calendar));
+            mBinding.tvAddmeetingStartpicker.setText(DateFormat.format("hh:mm aa", calendar));
         } else {
-            mDisplayEndTime.setText(DateFormat.format("hh:mm aa", calendar));
+            mBinding.tvAddmeetingEndpicker.setText(DateFormat.format("hh:mm aa", calendar));
         }
 
     }
@@ -136,14 +120,14 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         for (String email : selectedEmailList) {
             stringBuilder.append(email).append(" ");
         }
-        mDisplayEmail.setText(stringBuilder);
+        mBinding.tvAddmeetingEmail.setText(stringBuilder);
     }
 
     private void createNewMeeting() {
-        String date = mDisplayDate.getText().toString();
-        String startTime = mDisplayStartTime.getText().toString();
-        String endTime = mDisplayEndTime.getText().toString();
-        String subject = mSubject.getText().toString();
+        String date = mBinding.tvAddmeetingDatepicker.getText().toString();
+        String startTime = mBinding.tvAddmeetingStartpicker.getText().toString();
+        String endTime = mBinding.tvAddmeetingEndpicker.getText().toString();
+        String subject = mBinding.etAddmeetingSubject.getText().toString();
 
         if (date.length() != 0 && startTime.length() != 0 && endTime.length() != 0 && subject.length() != 0 && mParticipant != null) {
             Meeting meeting = new Meeting(mRoomName, date, startTime, endTime, subject, mParticipant);

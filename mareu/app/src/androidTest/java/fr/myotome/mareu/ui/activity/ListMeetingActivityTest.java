@@ -33,6 +33,11 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 public class ListMeetingActivityTest {
 
+    /**
+     * DISCLAIMER : to perform test, make sure your phone or emulator
+     * is turn in french language,
+     * or change date format in FakeDataGenerator.class
+     */
     @Rule
     public ActivityScenarioRule<ListMeetingActivity> mActivityTestRule = new ActivityScenarioRule<>(ListMeetingActivity.class);
 
@@ -70,7 +75,7 @@ public class ListMeetingActivityTest {
 
         // filtering list with no date
         onView(withId(R.id.item_menu)).perform(click());
-        onView(allOf(withId(R.id.title), withText("Filtre par date"))).perform(click());
+        onView(allOf(withId(R.id.title), withText(R.string.date_filter))).perform(click());
         onView(withId(android.R.id.button1)).perform(scrollTo(), click());
 
         // check filtering list is empty and message "filtered list" is visible
@@ -85,7 +90,7 @@ public class ListMeetingActivityTest {
 
         // perform filtration with 2 rooms
         onView(withId(R.id.item_menu)).perform(click());
-        onView(Matchers.allOf(withId(R.id.title), withText("Filtre par salle"))).perform(click());
+        onView(Matchers.allOf(withId(R.id.title), withText(R.string.room_filter))).perform(click());
         onView(withId(R.id.cb_room_filter_room1)).perform(click());
         onView(withId(R.id.cb_room_filter_room8)).perform(click());
         onView(withId(android.R.id.button1)).perform(scrollTo(), click());
