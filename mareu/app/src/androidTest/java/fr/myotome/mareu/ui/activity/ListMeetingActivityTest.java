@@ -1,6 +1,9 @@
 package fr.myotome.mareu.ui.activity;
 
 
+import android.widget.DatePicker;
+
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -24,6 +27,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -73,13 +77,14 @@ public class ListMeetingActivityTest {
         onView(ViewMatchers.withId(R.id.rv_activity_list_meeting)).check(RecyclerViewItemCountAssertion.withItemCount(13));
         onView(withId(R.id.tv_activity_list_meeting)).check(matches(not(isDisplayed())));
 
-        // filtering list with no date
+        // filtering list with 23 mars 2021 on date
         onView(withId(R.id.item_menu)).perform(click());
         onView(allOf(withId(R.id.title), withText(R.string.date_filter))).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2021,3,23));
         onView(withId(android.R.id.button1)).perform(scrollTo(), click());
 
-        // check filtering list is empty and message "filtered list" is visible
-        onView(ViewMatchers.withId(R.id.rv_activity_list_meeting)).check(RecyclerViewItemCountAssertion.withItemCount(0));
+        // check filtering list contain 3 meetings and message "filtered list" is visible
+        onView(ViewMatchers.withId(R.id.rv_activity_list_meeting)).check(RecyclerViewItemCountAssertion.withItemCount(3));
         onView(withId(R.id.tv_activity_list_meeting)).check(matches(isDisplayed()));
     }
 
