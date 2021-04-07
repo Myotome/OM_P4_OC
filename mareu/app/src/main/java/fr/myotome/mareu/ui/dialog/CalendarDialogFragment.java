@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CalendarView;
+import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,14 +46,15 @@ public class CalendarDialogFragment extends DialogFragment {
     }
 
     private void calendarManagement(View v){
-        CalendarView calendarView = v.findViewById(R.id.cv_calendar_frag);
-        calendarView.setOnDateChangeListener((calendarView1, i, i1, i2) -> {
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.YEAR, i);
-            calendar.set(Calendar.MONTH, i1);
-            calendar.set(Calendar.DAY_OF_MONTH, i2);
+        DatePicker calendarView = v.findViewById(R.id.dp_calendar_frag);
+        Calendar calendar = Calendar.getInstance();
+        calendarView.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), (view, year, monthOfYear, dayOfMonth) -> {
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.set(Calendar.YEAR, year);
+            calendar1.set(Calendar.MONTH, monthOfYear);
+            calendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             mDateList.clear();
-            mDate =java.text.DateFormat.getDateInstance().format(calendar.getTime());
+            mDate =java.text.DateFormat.getDateInstance().format(calendar1.getTime());
             mDateList.add(mDate);
         });
     }

@@ -14,6 +14,9 @@ import static org.hamcrest.Matchers.anything;
 
 public class NewMeetingTest {
 
+    /**
+     * create new meeting, using in ListMeetingActivityTest
+     */
 
     public static void newMeetingTest() {
         // click on floating action button to open new activity

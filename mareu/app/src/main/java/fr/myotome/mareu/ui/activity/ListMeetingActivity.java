@@ -100,8 +100,7 @@ public class ListMeetingActivity extends AppCompatActivity implements RecyclerVi
 
     /**
      * use calendar and roomFilter implementation
-     * for obtain
-     *
+     * to obtain
      * @param filter list of string
      */
     @Override
