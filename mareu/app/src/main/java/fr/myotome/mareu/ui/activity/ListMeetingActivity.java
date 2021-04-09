@@ -22,11 +22,12 @@ import fr.myotome.mareu.databinding.ActivityListMeetingBinding;
 import fr.myotome.mareu.di.DI;
 import fr.myotome.mareu.model.Meeting;
 import fr.myotome.mareu.service.MeetingApiService;
-import fr.myotome.mareu.ui.dialog.CalendarDialogFragment;
+import fr.myotome.mareu.ui.dialog.DateFilterDialogFragment;
 import fr.myotome.mareu.ui.dialog.RoomFilterDialogFragment;
 
-public class ListMeetingActivity extends AppCompatActivity implements RecyclerViewAdapter.OnDeleteClickListener,
-        CalendarDialogFragment.CalendarDialogListener,
+public class ListMeetingActivity extends AppCompatActivity
+        implements RecyclerViewAdapter.OnDeleteClickListener,
+        DateFilterDialogFragment.CalendarDialogListener,
         RoomFilterDialogFragment.RoomFilterDialogListener {
 
 
@@ -71,7 +72,7 @@ public class ListMeetingActivity extends AppCompatActivity implements RecyclerVi
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_date:
-                DialogFragment calendarSearch = new CalendarDialogFragment();
+                DialogFragment calendarSearch = new DateFilterDialogFragment();
                 calendarSearch.show(getSupportFragmentManager(), "calendarSearch");
                 return true;
             case R.id.item_room:
@@ -101,6 +102,7 @@ public class ListMeetingActivity extends AppCompatActivity implements RecyclerVi
     /**
      * use calendar and roomFilter implementation
      * to obtain
+     *
      * @param filter list of string
      */
     @Override
