@@ -28,7 +28,6 @@ import fr.myotome.mareu.controler.DatePickerFragment;
 import fr.myotome.mareu.controler.TimePickerFragment;
 import fr.myotome.mareu.model.Meeting;
 import fr.myotome.mareu.model.RoomName;
-import fr.myotome.mareu.service.MeetingApiService;
 import fr.myotome.mareu.ui.dialog.EmailListDialogFragment;
 
 public class AddMeetingActivity extends AppCompatActivity implements View.OnClickListener,
@@ -38,7 +37,6 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
         EmailListDialogFragment.onMultipleChoiceListener {
 
     private String mRoomName;
-    private MeetingApiService mApiService;
     private boolean mIsStart = true;
     private List<String> mParticipant;
     private ActivityAddMeetingBinding mBinding;
@@ -56,7 +54,6 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initialise() {
-        mApiService = DI.getMeetingApiService();
 
         mBinding.tvAddmeetingDatepicker.setOnClickListener(this);
         mBinding.tvAddmeetingStartpicker.setOnClickListener(this);
@@ -91,9 +88,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(year, month, day);
         mBinding.tvAddmeetingDatepicker.setText(java.text.DateFormat.getDateInstance().format(calendar.getTime()));
     }
 
@@ -131,7 +126,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
 
         if (date.length() != 0 && startTime.length() != 0 && endTime.length() != 0 && subject.length() != 0 && mParticipant != null) {
             Meeting meeting = new Meeting(mRoomName, date, startTime, endTime, subject, mParticipant);
-            mApiService.addNewMeeting(meeting);
+            DI.getMeetingApiService().addNewMeeting(meeting);
             Intent intent = new Intent(this, ListMeetingActivity.class);
             startActivity(intent);
             finish();
@@ -166,6 +161,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.bt_addmeeting_cancel:
                 onBackPressed();
+                finish();
                 break;
             case R.id.bt_addmeeting_add:
                 createNewMeeting();
